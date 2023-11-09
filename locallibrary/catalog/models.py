@@ -45,6 +45,14 @@ class Book(models.Model):
         """
         return reverse('book-detail', args=[str(self.id)])
 
+    def display_genre(self):
+        """
+        Creates a string for the Genre. This is required to display genre in Admin.
+        """
+        return ', '.join([genre.name for genre in self.genre.all()[:3]])
+
+    display_genre.short_description = 'Genre'
+
 
 import uuid # Required for unique book instances
 
@@ -98,5 +106,8 @@ class Author(models.Model):
         String for representing the Model object.
         """
         return '%s, %s' % (self.last_name, self.first_name)
+
+
+
 
 
